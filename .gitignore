@@ -132,3 +132,5 @@ data-bin/
 
 # Experimental Folder
 experimental/*
+
+data/*

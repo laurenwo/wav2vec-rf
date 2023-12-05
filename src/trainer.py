@@ -522,14 +522,15 @@ class Trainer(object):
             ):
                 torch.cuda.empty_cache()
 
-        if self.args.fp16:
-            metrics.log_scalar(
-                "loss_scale",
-                self.optimizer.scaler.loss_scale,
-                priority=700,
-                round=4,
-                weight=0,
-            )
+        # if self.args.fp16:
+        #     print(dir(self.optimizer))
+        #     metrics.log_scalar(
+        #         "loss_scale",
+        #         self.optimizer.scaler.loss_scale,
+        #         priority=700,
+        #         round=4,
+        #         weight=0,
+        #     )
 
         metrics.log_stop_time("train_wall")
 

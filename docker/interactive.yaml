@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wav2vec
+  labels: # Can add any job labels here
+    type: batch
+    class: wav2vec
+    app: wav2vec
+spec:
+  hostIPC: true # Use Host IPC. Necessary for multithreading in pytorch
+  restartPolicy: OnFailure # Whether to restart the pod when it fails. Values are "OnFailure" or "Never"
+  # nodeSelector:  ## Require the following node labels
+  #   nvidia: titan-v
+  securityContext:
+    fsGroup: 17685 # Group ID for file writes
+    runAsUser: 11959762 # User ID for file writes
+  volumes:
+  - name: workdisk
+    persistentVolumeClaim:
+      claimName: workdisk
+  - name: datasets
+    persistentVolumeClaim:
+      claimName: datasets
+  containers:
+  - name: main
+    workingDir: /store/code/wav2vec/
+    image: amr-registry.caas.intel.com/aipg/wav2vec:latest
+    command: ["sleep", "infinity"]
+    tty: true
+    stdin: true
+    resources:
+      limits: # Maximum resources needed (This section is required)
+        nvidia.com/gpu: 1 # 1 GPU
+        cpu: 11 # 10 CPU cores
+        memory: 128Gi # 16 GB RAM
+    volumeMounts:
+    - mountPath: "/store"
+      name: workdisk
+    - mountPath: "/datasets"
+      name: datasets
+    envFrom:
+    - configMapRef:
+        name: proxy-config

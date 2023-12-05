@@ -1,0 +1,7 @@
+# General
+--extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.10.2+cu113
+torchvision
+fairseq
+soundfile
+editdistance

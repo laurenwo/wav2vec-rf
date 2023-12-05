@@ -599,6 +599,7 @@ class Wav2Vec2Model(BaseFairseqModel):
         if features_only:
             return {"x": x, "padding_mask": padding_mask}
 
+        ## y is empty
         if self.quantizer:
             q = self.quantizer(y, produce_targets=False)
             y = q["x"]
@@ -768,6 +769,7 @@ class ConvFeatureExtractionModel(nn.Module):
     def forward(self, x):
 
         # BxT -> BxCxT
+        x = x.float()
         x = x.unsqueeze(1)
 
         for conv in self.conv_layers:
