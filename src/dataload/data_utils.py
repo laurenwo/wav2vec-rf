@@ -18,7 +18,7 @@ from typing import Tuple, Optional
 import numpy as np
 import torch
 
-from .data_utils_fast import batch_by_size_fast, batch_fixed_shapes_fast 
+from dataload.data_utils_fast import batch_by_size_fast, batch_fixed_shapes_fast 
 
 
 logger = logging.getLogger(__name__)

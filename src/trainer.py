@@ -735,9 +735,9 @@ class Trainer(object):
     def _log_oom(self, exc):
         msg = "OOM: Ran out of memory with exception: {}".format(exc)
         logger.warning(msg)
-        if torch.cuda.is_available() and hasattr(torch.cuda, "memory_summary"):
-            for device_idx in range(torch.cuda.device_count()):
-                logger.warning(torch.cuda.memory_summary(device=device_idx))
+        # if torch.cuda.is_available() and hasattr(torch.cuda, "memory_summary"):
+        #     for device_idx in range(torch.cuda.device_count()):
+        #         logger.warning(torch.cuda.memory_summary(device=device_idx))
         sys.stderr.flush()
 
     def _aggregate_logging_outputs(

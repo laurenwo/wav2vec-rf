@@ -23,7 +23,7 @@ spec:
       claimName: datasets
   containers:
   - name: main
-    workingDir: /store/code/wav2vec/
+    workingDir: /store/code/wav2vec-rf/
     image: amr-registry.caas.intel.com/aipg/wav2vec:latest
     command: ["sleep", "infinity"]
     tty: true
